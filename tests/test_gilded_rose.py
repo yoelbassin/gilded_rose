@@ -39,12 +39,12 @@ def test_basic_sell_in_degrading(initial_sell_in: int, expected_sell_in: int):
 
 
 @pytest.mark.parametrize(
-    "initial_quality, expected_quality",
-    [(10, 11), (50, 50)],
+    "initial_quality, initial_sell_in, expected_quality",
+    [(10, 10, 11), (50, 10, 50), (10, 0, 12), (50, 0, 50)],
 )
-def test_aged_brie_quality_degrading(initial_quality: int, expected_quality: int):
+def test_aged_brie_quality_degrading(initial_quality: int, initial_sell_in: int, expected_quality: int):
     item = create_item_and_update_quality(
-        name="Aged Brie", sell_in=10, quality=initial_quality
+        name="Aged Brie", sell_in=initial_sell_in, quality=initial_quality
     )
     assert item.quality == expected_quality
 
