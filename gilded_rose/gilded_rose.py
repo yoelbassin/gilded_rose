@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from typing import Iterable
-from gilded_rose.items import BasicItem, Item
+from gilded_rose.items import BasicItem, Item, AgedBrie, ManagedItem
 
 
 SPECIAL_ITEMS = [
@@ -10,16 +10,25 @@ SPECIAL_ITEMS = [
 ]
 
 
+def managed_items_factory(item: Item) -> ManagedItem:
+    match item.name:
+        case "Aged Brie":
+            return AgedBrie(item)
+    return BasicItem(item)
+
+
 class GildedRose(object):
     def __init__(self, items: Iterable[Item]) -> None:
         self.items = items
 
     def update_quality(self) -> None:
         for item in self.items:
-            if item.name not in SPECIAL_ITEMS:
-                managed_item = BasicItem(item)
+            if item.name not in SPECIAL_ITEMS or item.name == "Aged Brie":
+                managed_item = managed_items_factory(item)
                 managed_item.update_quality()
-                managed_item.decrease_sell_in()
+                if item.sell_in <= 0:
+                    managed_item.update_quality()
+                item.sell_in -= 1
 
             else:
 
