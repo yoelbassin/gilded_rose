@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from typing import Iterable
-from gilded_rose.items import BasicItem, Item, AgedBrie, ManagedItem, BackstagePass
+from gilded_rose.items import BasicItem, Item, AgedBrie, ManagedItem, BackstagePass, Sulfuras
 
 
 SPECIAL_ITEMS = [
@@ -16,6 +16,8 @@ def managed_items_factory(item: Item) -> ManagedItem:
             return AgedBrie(item)
         case "Backstage passes to a TAFKAL80ETC concert":
             return BackstagePass(item)
+        case "Sulfuras, Hand of Ragnaros":
+            return Sulfuras(item)
     return BasicItem(item)
 
 
@@ -29,6 +31,7 @@ class GildedRose(object):
                 item.name not in SPECIAL_ITEMS
                 or item.name == "Aged Brie"
                 or item.name == "Backstage passes to a TAFKAL80ETC concert"
+                or item.name == "Sulfuras, Hand of Ragnaros"
             ):
                 managed_item = managed_items_factory(item)
                 managed_item.update_quality()

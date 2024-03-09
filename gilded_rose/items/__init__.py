@@ -3,6 +3,7 @@ from gilded_rose.items.managed_item import ManagedItem
 from gilded_rose.items.basic_item import BasicItem
 from gilded_rose.items.aged_brie import AgedBrie
 from gilded_rose.items.backstage_pass import BackstagePass
+from gilded_rose.items.sulfuras import Sulfuras
 
 
-__all__ = ["Item", "ManagedItem", "BasicItem", "AgedBrie", "BackstagePass"]
+__all__ = ["Item", "ManagedItem", "BasicItem", "AgedBrie", "BackstagePass", "Sulfuras"]
