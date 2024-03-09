@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from typing import Iterable
-from gilded_rose.items import BasicItem, Item, AgedBrie, ManagedItem
+from gilded_rose.items import BasicItem, Item, AgedBrie, ManagedItem, BackstagePass
 
 
 SPECIAL_ITEMS = [
@@ -14,6 +14,8 @@ def managed_items_factory(item: Item) -> ManagedItem:
     match item.name:
         case "Aged Brie":
             return AgedBrie(item)
+        case "Backstage passes to a TAFKAL80ETC concert":
+            return BackstagePass(item)
     return BasicItem(item)
 
 
@@ -23,7 +25,11 @@ class GildedRose(object):
 
     def update_quality(self) -> None:
         for item in self.items:
-            if item.name not in SPECIAL_ITEMS or item.name == "Aged Brie":
+            if (
+                item.name not in SPECIAL_ITEMS
+                or item.name == "Aged Brie"
+                or item.name == "Backstage passes to a TAFKAL80ETC concert"
+            ):
                 managed_item = managed_items_factory(item)
                 managed_item.update_quality()
                 if item.sell_in <= 0:
