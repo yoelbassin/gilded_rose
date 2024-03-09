@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
-import unittest
 
 from gilded_rose.gilded_rose import Item, GildedRose
 
 
-class GildedRoseTest(unittest.TestCase):
-    def test_foo(self):
-        items = [Item("foo", 0, 0)]
-        gilded_rose = GildedRose(items)
-        gilded_rose.update_quality()
-        self.assertEqual("fixme", items[0].name)
 
-
-if __name__ == "__main__":
-    unittest.main()
+def test_regular_item():
+    item = Item("foo", 10, 10)
+    gilded_rose = GildedRose((item,))
+    gilded_rose.update_quality()
+    
+    assert item.quality == 9
+    assert item.sell_in == 9
