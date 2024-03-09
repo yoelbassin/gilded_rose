@@ -100,3 +100,18 @@ def test_basic_conjured_item(
     )
     assert item.quality == expected_quality 
     
+
+@pytest.mark.parametrize(
+    "initial_quality, initial_sell_in, expected_quality",
+    [(10, 10, 12), (50, 10, 50), (10, 0, 14), (50, 0, 50)],
+)
+def test_conjured_aged_brie(
+   initial_quality: int, initial_sell_in: int, expected_quality: int 
+):
+    item = create_item_and_update_quality(
+        conjured=True,
+        name="Aged Brie",
+        sell_in=initial_sell_in,
+        quality=initial_quality,
+    )
+    assert item.quality == expected_quality  

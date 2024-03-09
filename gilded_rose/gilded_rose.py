@@ -16,7 +16,7 @@ def is_conjured(item: Item):
 def _create_managed_item(item: Item):
     name = item.name
     if is_conjured(item):
-        name = item.name.strip("Conjured ")
+        name = name[9:]
     match name:
         case "Aged Brie":
             return AgedBrie(item)
